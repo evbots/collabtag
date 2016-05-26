@@ -1,0 +1,241 @@
+
+.fancy-row {
+  @include make-row-fancy();
+}
+
+.mobile-menu {
+  z-index: 2000;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: $collabtag-blue;
+  .top-mobile-menu-close-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    i { color: white; }
+  }
+
+  .change-school {
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    .change-school-link {
+      display: inline-block;
+      margin-left: 15px;
+    }
+    .mobile-menu-close-button {
+      color: black;
+      display: inline-block;
+      float: right;
+      margin-right: 15px;
+      i { font-size: 125%; }
+    }
+  }
+
+  .school-name {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 30px;
+    background-color: #256089;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+  .list-group .list-group-item {
+    border: none;
+    background-color:rgba(0, 0, 0, 0.0);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .discussions {
+    p {
+      font-weight: bold;
+      color: #E5E5E5;
+      padding-left: 30px;
+      padding-bottom: 0px;
+      margin-bottom: 10px;
+      @media (max-width: $screen-sm-max) {
+        padding-left: 15px;
+      }
+    }
+    
+  }
+  ul {        
+    padding-top: 0px;
+    padding-left: 15px;
+    @media (max-width: $screen-sm-max) {
+      padding-top: 0px;
+      padding-left: 0px;
+    }
+    a { color: white; }
+    li {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+}
+
+.mobile-menu-data {
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+  visibility: 0s 0.5s;
+  transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.mobile-menu-open {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+
+.container-fluid-fancy { @include container-fluid-fancy(); }
+.app-wrapper {
+
+  .row-no-gutters {
+    @include make-row-fancy();
+    @include no-gutters();
+  }
+
+  .sidebar-desktop {
+    // 3 columns on tablet and up
+    @include make-sm-column(3, 0px);
+
+    //hide desktop sidebar on mobile
+    @media (max-width: $screen-xs-max) { display: none; }
+
+    .affix {
+      width: inherit;
+      background-color: $collabtag-blue;
+      height: 100%;
+
+      .change-school {
+        background-color: white;
+        text-align: center;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+      }
+
+      .school-name {
+        margin-top: 50px;
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 30px;
+        background-color: #256089;
+        padding-top: 15px;
+        padding-bottom: 15px;
+      }
+
+      .list-group .list-group-item {
+        border: none;
+        background-color:rgba(0, 0, 0, 0.0);
+        color: white;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .discussions {
+        p {
+          font-weight: bold;
+          color: #E5E5E5;
+          padding-left: 30px;
+          padding-bottom: 0px;
+          margin-bottom: 10px;
+          @media (max-width: $screen-sm-max) {
+            padding-left: 15px;
+          }
+        }
+        
+      }
+      ul {        
+        padding-top: 0px;
+        padding-left: 15px;
+        @media (max-width: $screen-sm-max) {
+          padding-top: 0px;
+          padding-left: 0px;
+        }
+        a { color: white; }
+        li {
+          padding-top: 8px;
+          padding-bottom: 8px;
+        }
+      }
+    }
+  }
+
+  // full width mobile
+  // 9 columns on tablet and up
+  .main-view {
+    @include make-xs-column(12, 0px);
+
+    &.sidebar {
+      @include make-sm-column(9, 0px);
+    }
+    .group-screen-notifications {
+      @include make-sm-column(12, 0px);
+      margin-top: 10px;
+      .alert {
+        margin-bottom: 0px;
+      }
+    }
+    .screen-notifications {
+      @include make-xs-column(12, 0px);
+
+      // provide padding for the errors on tablet and up
+      @media (min-width: $screen-sm-min) {
+        @include make-sm-column(10);
+        @include make-sm-column-offset(1);
+      }
+      padding-right: 15px;
+      padding-left: 15px;
+      .alert {
+        margin-bottom: 0px;
+      }
+    }
+  }
+}
+
+.explore-blank {
+  margin-top: 50px;
+  p {
+    @media (max-width: $screen-xs-max) {
+      margin-top: 200px;
+    }
+    font-size: 22px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.hide-tablet-up {
+  //hide mobile footer on tablet and up
+  @media (min-width: $screen-sm-min) { display: none; }
+}
+
+.flash-padding {
+  padding-top: 60px;
+  background-color: white;
+}
+
+.profile-padding {
+  margin-bottom: 50px;
+}

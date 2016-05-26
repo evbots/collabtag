@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>collabtag</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <%= favicon_link_tag 'favicon.png' %>
+  <%= favicon_link_tag 'favicon.png', rel: 'apple-touch-icon', type: 'image/png' %>
+  <%= content_for?(:meta_tags) ? content_for(:meta_tags) : "" %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= yield(:styles) %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-57577503-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  <%= csrf_meta_tags %>
+</head>
+
+<body class="<%= @profile_page ? 'profile-page-bg' : ''%>">
+  <% if @show_sidebar %> 
+    <%= render 'shared/menu/offcanvas' %>
+  <% end %>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <%= link_to(user_signed_in? ? show_user_path(current_user.username) : root_path, class: "navbar-brand brand-rule") do %>
+          <span class="brand-collab">collab</span><span class="brand-tag">tag</span>
+        <% end %>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="nav-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+            <li class="<% if current_page?(show_user_path(current_user.username)) %>active<% end %>" >
+              <%= link_to("@#{current_user.username}", show_user_path(current_user.username)) %>
+            </li>
+            <li>
+              <%= link_to('Notifications', view_notifications_path) %>
+            </li>
+            <li class="dropdown <% if current_page?(edit_user_path) || current_page?(user_invite_pending_path) %>active<% end %>">
+              <a data-toggle="dropdown" href="#">Account <i class="fa fa-caret-down"></i></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li class="<% if current_page?(edit_user_path) %>active<% end %>"><%= link_to("Edit Profile", edit_user_path) %></li>
+                <li><%= link_to('Send Feedback', view_feedback_form_path) %></li>
+                <li role="presentation" class="divider"></li>
+                <li><%= link_to(destroy_user_session_path, :method => :delete) do %>
+                  <i class="fa fa-sign-out"></i> Logout
+                <% end %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to('Sign up', new_user_registration_path)  %></li>
+            <li><%= link_to('Login', new_user_session_path)  %></li>
+          <% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
+  </nav>
+
+  <div class="container-fluid-fancy app-wrapper">
+
+    <div class="<%= @show_sidebar ? 'row-no-gutters' : 'fancy-row' %>">
+      <% if @show_sidebar %>
+        <div class="sidebar-desktop">
+          <div class="affix">
+            <%= render 'shared/menu/desktop' %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="main-view <%= class_if_sidebar %>">
+        <% unless @group %>
+          <%= render 'shared/errors' %>
+        <% end %>
+        
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
+  <% if @profile_page %>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+          <% if @show_sidebar %>
+            <div class="navbar-header hide-tablet-up">
+              <a href class="navbar-brand offcanvas-toggle" data-toggle="offcanvas" data-target="#js-bootstrap-offcanvas" id="menu-trigger">
+                <i class="fa fa-caret-square-o-right" id="right-caret-mobile"></i>
+                <i class="fa fa-caret-square-o-left" id="left-caret-mobile" style="display: none;"></i>
+              </a>
+            </div>
+          <% end %>
+          <form class="navbar-form share-buttons-navbar" role="search">
+            <div class="form-group">
+              <a href id="facebook-share" class="btn btn-default btn-circle">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="https://twitter.com/intent/tweet?<%= { text: "Collabtag is a social collaboration service for university students", url: request.original_url, via: 'collabtag', hashtags: 'collabtag' }.to_param %>" id="twitter-share" class="btn btn-default btn-circle">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="https://plus.google.com/share?<%= { url: request.original_url }.to_param %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;" class="btn btn-default btn-circle">
+                <i class="fa fa-google-plus"></i>
+              </a>
+            </div>
+          </form>
+      </div>
+    </nav>
+  <% else %>
+    <% if @show_sidebar %>
+      <nav class="navbar navbar-default navbar-fixed-bottom hide-tablet-up">
+        <div class="container">
+          <div class="navbar-header">
+            <% if @show_sidebar %>
+              <a href class="navbar-brand" id="mobile-menu-trigger">
+                <i class="fa fa-bars"></i>
+              </a>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    <% end %>
+  <% end %>
+
+</body>
+<%= yield(:script) %>
+</html>

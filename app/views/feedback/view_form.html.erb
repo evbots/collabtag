@@ -1,0 +1,17 @@
+<div class="container feedback-container">
+ <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <h1 class="text-center"><strong>Feedback</strong></h1>
+      <h2 class="text-center"><small>Help us improve collabtag for thousands of users.</small></h2>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <%= bootstrap_form_for(:feedback, url: save_feedback_form_path) do |f| %>
+        <%= f.text_area :content, hide_label: true, rows: 7, placeholder: 'How can collabtag be improved?', class: 'form-control' %>
+        <%= f.submit 'Send Feedback', :class => 'btn btn-primary pull-right' %>
+      <% end %>
+    </div>
+  </div>
+</div>

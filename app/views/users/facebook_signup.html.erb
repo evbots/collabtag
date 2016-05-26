@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="facebook-header">
+        <span>Continue to sign up for <b>collabtag</b></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="facebook-form">
+        <%= bootstrap_form_for(@facebook_info, url: finalize_signup_path) do |f| %>
+
+          <% if @show_email %>
+            <%= f.email_field :email %>
+            <%= display_errors(:email, @errors) %>
+          <% end %>
+
+          <%= f.text_field :username %>
+          <%= display_errors(:username, @errors) %>
+
+          <%= f.submit 'Go to profile', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

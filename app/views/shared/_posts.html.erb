@@ -1,0 +1,30 @@
+<div class="post-wrapper" style="display: none;">
+  <% @posts.each do |post| %>
+    <% user = post.user %>
+    <div class="media-wrapper" id="post_<%= post.id %>">
+      <li class="media" style="overflow:visible;">
+        <div class="media-left">
+          <a class="pull-left" id="user-image-anchor">
+            <img src="<%= user_image_url(user) %>" class="media-object img-circle" style="width: 64px; height: 64px;">
+          </a>
+        </div>
+        <div class="media-body">
+          <h5 class="media-heading public_name"><a href="/<%= user.username %>" class="username_url">@<%= user.username %></a></span><span class="time"> &middot; <span class="time-to-convert"><%= post.created_at.strftime('%b %d, %Y at %-l:%M%P') %></span></span></h5>
+          <p class="post_body"><%= username_regex(post.body) %></p>
+        </div>
+        <% if current_user ? current_user == user : false %>
+          <div class="media-right">
+            <a data-post-id="<%= post.id %>" class="delete-post" href><i class="fa fa-times"></i></a>
+          </div>
+        <% end %>
+        <% if show_tag %>
+          <div class="tag-wrapper post-tag">
+            <%= link_to(explore_school_group_path(group: post.group.tag, school_code: post.group.school)) do %>
+              #<%= post.group.tag %>
+            <% end %>
+          </div>
+        <% end %>
+      </li>
+    </div>
+  <% end %>
+</div>

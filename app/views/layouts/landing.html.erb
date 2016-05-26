@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Collabtag is a social collaboration service for university students">
+  <meta name="author" content="Collabtag.com">
+
+  <meta property="og:title" content="Collabtag">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://www.collabtag.com/">
+  <meta property="og:image" content="<%= asset_url('landing_logo.gif') %>">
+  <meta property="og:image:width" content="150" />
+  <meta property="og:image:height" content="150" />
+  <meta property="og:description" content="Collabtag is a social collaboration service for university students">
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@collabtag" />
+  <meta name="twitter:title" content="Collabtag" />
+  <meta name="twitter:description" content="Collabtag is a social collaboration service for university students" />
+  <meta name="twitter:image" content="<%= asset_url('landing_logo.gif') %>" />
+  <meta name="twitter:url" content="http://www.collabtag.com/" />
+
+  <title>collabtag</title>
+  <%= favicon_link_tag 'favicon.png?v=2' %>
+  <%= favicon_link_tag 'favicon.png?v=2', rel: 'apple-touch-icon', type: 'image/png' %>
+
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+<%= yield(:script) %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-57577503-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  <%= csrf_meta_tags %>
+</head>
+<body style="padding-top:50px;" class="landing-page">
+<%= yield %>
+</body>
+</html>
+<%= yield(:script) %>
+

@@ -1,0 +1,39 @@
+.left-panel {
+  @include make-xs-column-offset(1);
+  @include make-xs-column(10);
+  // on small desktop and up, make regular
+  @media (min-width: $screen-md-min) {
+    @include make-md-column(4);
+    @include make-md-column-offset(2);
+  }
+}
+
+.right-panel {
+  @include make-xs-column-offset(1);
+  @include make-xs-column(10);
+  // on small desktop and up, make regular
+  @media (min-width: $screen-md-min) {
+    @include make-md-column(4);
+    @include make-md-column-offset(0);
+  }
+}
+
+.buffer {
+  padding-top: 25px;
+  @media (min-width: $screen-md-min) {
+    padding-top: 50px;
+  }
+}
+
+.panel-title {
+  @include make-xs-column(10);
+  @include make-xs-column-offset(1);
+  @media (min-width: $screen-md-min) {
+    @include make-md-column(8);
+    @include make-md-column-offset(2);
+  }
+}
+
+.panel-padding-top {
+  margin-top: 30px;
+}

@@ -1,0 +1,71 @@
+$border-radius-base: 0;
+$fancy-radius: 4px;
+$list-group-active-bg: #333;
+$btn-primary-bg: #3a87bc;
+$collabtag-color: #3a87bc;
+$collabtag-background: #eeeeee;
+$border-alt-color: #d1d1d1;
+$collabtag-radius: 4px;
+$collabtag-blue: #3a87bc;
+$dark-alt: #231f20;
+
+
+@mixin fancy-border-radius() {
+  @include border-top-radius($fancy-radius);
+  @include border-right-radius($fancy-radius);
+  @include border-bottom-radius($fancy-radius); 
+  @include border-left-radius($fancy-radius);
+}
+
+@mixin fancy-border-container() {
+  @include fancy-border-radius();
+  border-color: $border-alt-color;
+  border-style: solid;
+  border-width: 1px;
+}
+
+@mixin word-wrap() {
+  word-break:     break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens:    auto;
+  hyphens:         auto;
+}
+
+@mixin custom-shadow() {
+  -webkit-box-shadow: 2px 2px 3px 0px $dark-alt;
+  -moz-box-shadow: 2px 2px 3px 0px $dark-alt;
+  box-shadow: 2px 2px 3px 0px $dark-alt;
+}
+
+@font-face {
+  font-family: 'PFSquareSansPro-Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url(<%= asset_path 'PFSquareSansPro-Regular.woff' %>) format('woff');
+}
+
+@font-face {
+  font-family: 'PFSquareSansPro-Medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url(<%= asset_path 'PFSquareSansPro-Medium.woff' %>) format('woff');
+}
+
+@font-face {
+  font-family: 'PFSquareSansPro-bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url(<%= asset_path 'PFSquareSansPro-Bold.woff' %>) format('woff');
+}
+
+$collabtag-normal: PFSquareSansPro-Regular, sans-serif;
+$brand-medium: PFSquareSansPro-Medium, sans-serif;
+$brand-bold: PFSquareSansPro-Bold, sans-serif;
+
+@mixin brand_font_medium() {
+  font: 100% $brand-medium;
+}
+
+@mixin brand_font_bold() {
+  font: 100% $brand-bold;
+}

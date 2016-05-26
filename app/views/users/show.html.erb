@@ -1,0 +1,46 @@
+<% content_for :meta_tags do %>
+  <% combined_meta_tags({ title: "@#{@user.username}'s collabtag profile",
+                          description: "Collabtag is a social collaboration service for university students",
+                          image: user_image_url(@user),
+                          url: request.original_url }) %>
+<% end %>
+
+<div class="profile-page">
+  <div class="fancy-row profile-top">
+      <div class="structure top-container">
+        <div class="top-image pretty-profile-pic">
+          <%= profile_pic_help(@user, :account) %>
+        </div>
+        <div class="top-info">
+          <h1><%= @user.full_name %></h1>
+          <h3 data-username="<%= @user.username %>" id="username-container">@<%= @user.username %></h3>
+        </div>
+      </div>
+  </div>
+  <div class="fancy-row profile-bottom">
+      <div class="structure bottom-container style-posts">
+        <% if @user.posts.length > 0 %>
+        <ul class="media-list">
+          <div class="user-posts">
+          </div>
+          <div class="ajax-spinner text-center">
+            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+          </div>
+        </ul>
+        <% else %>
+          <div class="welcome-message">
+            <p>
+            <% if current_user == @user %>
+              <% if @user.brand_new? %>
+                <span>Welcome @<%= @user.username %>!</span>
+              <% end %>
+              We're glad you decided to check us out. Once you find your school and post to a discussion, you'll see that history here.
+            <% else %>
+              There is no history of posts for this user yet. Check back soon now, ya hear?
+            <% end %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+  </div>
+</div>

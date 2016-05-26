@@ -1,0 +1,25 @@
+<div class="fancy-row">
+  <div class="buffer">
+    <div class="left-panel">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+            <%= f.text_field :login, label: "Email or Username", autofocus: true %>
+            <%= f.password_field :password, autocomplete: "off" %>
+            <% if devise_mapping.rememberable? -%>
+              <%= f.check_box :remember_me %>
+            <% end -%>
+            <%= f.submit "Login" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="right-panel">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

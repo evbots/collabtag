@@ -1,0 +1,89 @@
+<% content_for :script do %>
+  <%= javascript_tag do %>
+    window.group_id = '<%= @group.id %>'
+  <% end %>
+<% end %>
+
+<% content_for :meta_tags do %>
+  <% combined_meta_tags({
+      title: "#{@school_name} / ##{@group_name}",
+      description: "See all ##{@group_name} posts at #{@school_name}. Collabtag is a social collaboration service for university students",
+      image: image_url('landing_logo.gif'),
+      url: request.original_url
+    }) %>
+<% end %>
+
+<div class="group-page">
+  <div class="fancy-row group-top">
+    <div class="structure top-container">
+      <h4>#<%= @group_name %></h4>
+      <div class="group-share-icons">
+        <a href id="facebook-share">
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/intent/tweet?<%= { text: "See all ##{@group_name} posts at #{@school_name}", url: request.original_url, via: 'collabtag', hashtags: 'collabtag' }.to_param %>" id="twitter-share">
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="https://plus.google.com/share?<%= { url: request.original_url }.to_param %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="fancy-row group-bottom">
+    <div class="structure bottom-container">
+      
+      <% if show_flash? flash %>
+        <div class="fancy-row">
+          <div class="group-screen-notifications">
+            <div class="alert alert-dismissible <%= flash_class(flash) %>" role="alert">
+              <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <strong><%= flash_message(flash) %></strong>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <% if user_signed_in?  %>
+        <div class="group-post post-transition">
+          <div class="post-photo">
+            <%= profile_pic_help(@user, :new_post, 'public-post-picture') %>
+          </div>
+          <div class="post-body">
+            <textarea class="form-control" id="post-body" rows="3" placeholder="Share something interesting..." <%= 'disabled' if @tutorial %>></textarea>
+          </div>
+        </div>
+        <div class="group-post-divider"></div>
+        <div class="group-post-submit">
+          <a role="button" class="btn btn-primary <%= 'disabled' if @tutorial %>" id="send-post">&nbsp;<span id="post-button-color">Post</span>&nbsp;</a>
+        </div>
+      <% else %>
+        <div class="group-post-blocked">
+          <p>In order to post, join the community!</p>
+          <%= link_to('Sign Up', new_user_registration_path, class: 'btn btn-primary') %>  - Or -  <%= link_to('Login', new_user_session_path, class: 'btn btn-primary') %>
+        </div>
+      <% end %>
+
+      <br>
+      <div class="style-posts">
+        <% if @group.posts.length < 1 %>
+          <div class="welcome-message">
+            <p>
+              There is no activity here yet. Be the first to post! But really, do it!
+            </p>
+          </div>
+        <% end %>
+        <ul class="group-post-container media-list <%= 'tutorial' if @tutorial %>">
+          <div class="activity-stream">
+          </div>
+          <div class="ajax-spinner text-center">
+            <i class="fa fa-circle-o-notch fa-spin fa-2x"></i>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

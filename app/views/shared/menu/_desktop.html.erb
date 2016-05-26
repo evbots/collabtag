@@ -1,0 +1,26 @@
+<% if @group_list %>
+  <div class="school-name">
+    <%= explore_specific %>
+  </div>
+  <div class="discussions">
+    <p>DISCUSSION TAGS</p>
+  </div>
+  <ul class="list-group">
+    <% @group_list.each do |group| %>
+      <li class="list-group-item">
+        <%= link_to("##{group}", explore_school_group_path(group: group, school_code: @school_code)) %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="change-school <%= 'profile-padding' if @profile_page %>">
+    <%= link_to('CHANGE SCHOOL', explore_base_path(force: true)) %>
+  </div>
+<% else %>
+  <div class="explore-blank">
+    <p class="explore-container">
+      <%= link_to(explore_base_path(force: true)) do %>
+        <i class="fa fa-search"></i> Explore
+      <% end %>
+    </p>
+  </div>
+<% end %>

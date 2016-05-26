@@ -1,0 +1,14 @@
+<div class="desktop-sidebar">
+  <div class="panel-header-colored">
+    <p class="text-center">Share</p>
+  </div>
+  <p class="text-center">
+    <a href id="facebook-share"><i class="fa fa-facebook-official fa-3x"></i></a>
+    <a href="https://twitter.com/intent/tweet?<%= { text: "Share anonymously or publicly within the '#{@group.name}' collabtag group.", url: request.original_url, via: 'collabtag', hashtags: 'collabtag' }.to_param %>" id="twitter-share">
+      <i class="fa fa-twitter-square fa-3x"></i>
+    </a>
+    <a href="https://plus.google.com/share?<%= { url: request.original_url }.to_param %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+      <i class="fa fa-google-plus-square fa-3x"></i>
+    </a>
+  </p>
+</div>

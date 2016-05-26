@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="page-header">Your Notifications</h2>
+      <p class="lead">
+        <% unless @user.notifications.length > 0 %>
+        It looks like you don't have any notifications yet. Check back later.
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <% if @user.notifications.length > 0 %>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <ul class="list-group">
+          <% @user.notifications.order(created_at: :desc).each do |notification| %>
+            <li class="list-group-item">
+              <%= notification_text_output(notification) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>

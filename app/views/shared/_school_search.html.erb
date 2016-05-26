@@ -1,0 +1,10 @@
+<% content_for :script do %>
+   <%= javascript_include_tag 'school_typeahead.js' %>
+<% end %>
+
+<div class="facebook-form">
+  <%= bootstrap_form_for(:school, url: set_school_path, html: { class: 'school-form' }) do |f| %>
+    <%= f.text_field :school_select, class: 'typeahead form-control', placeholder: 'Start typing a school name', hide_label: true %>
+    <%= f.submit 'Go to profile', class: 'btn btn-primary school-submit' %>
+  <% end %>
+</div>

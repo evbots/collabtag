@@ -1,0 +1,13 @@
+<div class="fancy-row flash-padding">
+  <div class="screen-notifications">
+    <% if show_flash? flash %>
+      <div class="alert alert-dismissible <%= flash_class(flash) %>" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <strong><%= flash_message(flash) %></strong>
+      </div>
+    <% end %>
+  </div>
+</div>
